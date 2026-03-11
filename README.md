@@ -1,8 +1,8 @@
 # HRMS Lite — Human Resource Management System
 
-![Backend Tests](https://github.com/kapilraghav2801/HRMS/actions/workflows/test.yml/badge.svg)
+[![Backend Tests](https://github.com/kapilraghav2801/HRMS/actions/workflows/test.yml/badge.svg)](https://github.com/kapilraghav2801/HRMS/actions/workflows/test.yml)
 
-A full-stack HRMS application built with **FastAPI + PostgreSQL** (backend) and **React + Vite** (frontend),  
+A full-stack HRMS application built with **FastAPI + PostgreSQL** (backend) and **React + Vite** (frontend),
 featuring complete employee management, attendance tracking, and a live dashboard.
 
 ---
@@ -20,27 +20,37 @@ featuring complete employee management, attendance tracking, and a live dashboar
 
 ---
 
+## Tech Stack
+
+| Layer | Technology |
+| ---------- | ------------------------------ |
+| Backend | FastAPI, SQLAlchemy, PostgreSQL |
+| Frontend | React 19, Vite, TailwindCSS |
+| Testing | Pytest, SQLite (in-memory) |
+| Deployment | Render (API) + Vercel (UI) |
+
+---
+
 ## Project Structure
 
 ```
 HRMS/
 ├── app/
-│   ├── models/       (employee.py, attendance.py)
-│   ├── routes/       (employees.py, attendance.py, dashboard.py)
-│   ├── schemas/      (employee.py, attendance.py)
+│   ├── main.py
+│   ├── models.py
+│   ├── schemas.py
+│   ├── crud.py
 │   ├── database.py
-│   ├── enums.py
-│   └── main.py
-├── tests/            (43 tests, 96% coverage)
-│   ├── conftest.py
-│   ├── test_employees.py
-│   ├── test_attendance.py
-│   └── test_dashboard.py
+│   └── routers/
+│       ├── employees.py
+│       ├── attendance.py
+│       └── dashboard.py
+├── tests/
+│   └── test_api.py
 ├── frontend/
 │   ├── src/
-│   │   ├── components/   (Layout, Modal, Toast)
-│   │   ├── pages/        (Dashboard, Employees, Attendance)
-│   │   ├── api.js
+│   │   ├── components/
+│   │   ├── pages/
 │   │   └── App.jsx
 │   └── package.json
 ├── .github/
@@ -61,11 +71,9 @@ HRMS/
 git clone https://github.com/kapilraghav2801/HRMS.git
 cd HRMS
 pip install -r requirements.txt
-
 # 2. Copy env and start backend
 cp .env.example .env
 uvicorn app.main:app --reload --port 8000
-
 # 3. Start frontend (in a separate terminal)
 cd frontend
 npm install
@@ -87,11 +95,11 @@ pytest
 
 ## Environment Variables
 
-| Variable            | Default                        | Description                          |
+| Variable | Default | Description |
 | ------------------- | ------------------------------ | ------------------------------------ |
-| `DATABASE_URL`      | PostgreSQL connection string   | Production DB (PostgreSQL on Render) |
-| `TEST_DATABASE_URL` | `sqlite:///./test_hrms.db`     | Test DB (SQLite in-memory)           |
-| `CORS_ORIGINS`      | `http://localhost:5173,...`    | Comma-separated allowed origins      |
+| `DATABASE_URL` | PostgreSQL connection string | Production DB (PostgreSQL on Render) |
+| `TEST_DATABASE_URL` | `sqlite:///./test_hrms.db` | Test DB (SQLite in-memory) |
+| `CORS_ORIGINS` | `http://localhost:5173,...` | Comma-separated allowed origins |
 
 ---
 
@@ -99,18 +107,38 @@ pytest
 
 See [API.md](API.md) for full documentation.
 
-| Method         | Path                          | Description                  |
+| Method | Path | Description |
 | -------------- | ----------------------------- | ---------------------------- |
-| GET            | `/api/health`                 | Health check                 |
-| POST           | `/api/employees/`             | Create employee              |
-| GET            | `/api/employees/`             | List / search employees      |
-| GET            | `/api/employees/departments`  | List departments             |
-| GET            | `/api/employees/{id}`         | Get employee                 |
-| PUT            | `/api/employees/{id}`         | Update employee              |
-| DELETE         | `/api/employees/{id}`         | Delete employee              |
-| GET            | `/api/employees/{id}/summary` | Attendance summary           |
-| POST           | `/api/attendance/`            | Mark attendance              |
-| GET            | `/api/attendance/`            | List attendance (filters)    |
-| GET            | `/api/attendance/today`       | Today's attendance           |
-| GET/PUT/DELETE | `/api/attendance/{id}`        | Get / update / delete record |
-| GET            | `/api/dashboard/stats`        | Dashboard statistics         |
+| GET | `/api/health` | Health check |
+| POST | `/api/employees/` | Create employee |
+| GET | `/api/employees/` | List / search employees |
+| GET | `/api/employees/departments` | List departments |
+| GET | `/api/employees/{id}` | Get employee |
+| PUT | `/api/employees/{id}` | Update employee |
+| DELETE | `/api/employees/{id}` | Delete employee |
+| GET | `/api/employees/{id}/summary` | Attendance summary |
+| POST | `/api/attendance/` | Mark attendance |
+| GET | `/api/attendance/` | List attendance (filters) |
+| GET | `/api/attendance/today` | Today's attendance |
+| GET/PUT/DELETE | `/api/attendance/{id}` | Get / update / delete record |
+| GET | `/api/dashboard/stats` | Dashboard statistics |
+
+## Live URL
+
+[https://hrms-v76q.vercel.app/](https://hrms-v76q.vercel.app/)
+
+---
+
+## Screenshots
+
+### Dashboard
+
+![Dashboard](https://github.com/user-attachments/assets/57f15c18-956b-431d-8511-9069372144c1)
+
+### Employee Management
+
+![Employees](screenshots/employees.png)
+
+### Attendance Tracking
+
+![Attendance](screenshots/attendance.png)
