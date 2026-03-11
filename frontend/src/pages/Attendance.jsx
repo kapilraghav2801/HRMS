@@ -9,6 +9,14 @@ import {
 import { useToast } from '../components/Toast';
 import Modal, { ConfirmModal } from '../components/Modal';
 
+function getApiError(err) {
+  const detail = err.response?.data?.detail;
+  if (!detail) return 'Something went wrong';
+  if (Array.isArray(detail))
+    return detail.map((d) => d.msg ?? String(d)).join(', ');
+  return String(detail);
+}
+
 const STATUS_OPTIONS = ['Present', 'Absent', 'Late', 'Half Day'];
 
 const badgeClass = {
@@ -104,7 +112,7 @@ export default function Attendance() {
       setMarkForm({ employee_id: '', date: today(), status: 'Present' });
       await fetchRecords();
     } catch (err) {
-      toast(err.response?.data?.detail || 'Failed to mark attendance', 'error');
+      toast(getApiError(err) || 'Failed to mark attendance', 'error');
     } finally {
       setMarking(false);
     }
@@ -118,7 +126,7 @@ export default function Attendance() {
       setEditRecord(null);
       await fetchRecords();
     } catch (err) {
-      toast(err.response?.data?.detail || 'Update failed', 'error');
+      toast(getApiError(err) || 'Update failed', 'error');
     } finally {
       setUpdating(false);
     }

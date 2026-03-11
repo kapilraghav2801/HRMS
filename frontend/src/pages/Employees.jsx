@@ -9,6 +9,16 @@ import {
 import { useToast } from '../components/Toast';
 import Modal, { ConfirmModal } from '../components/Modal';
 
+// FastAPI validation errors return detail as an array of objects;
+// extract a readable string from either format.
+function getApiError(err) {
+  const detail = err.response?.data?.detail;
+  if (!detail) return 'Something went wrong';
+  if (Array.isArray(detail))
+    return detail.map((d) => d.msg ?? String(d)).join(', ');
+  return String(detail);
+}
+
 const EMPTY_FORM = {
   employee_id: '',
   name: '',
@@ -112,7 +122,7 @@ export default function Employees() {
       setEditing(null);
       await Promise.all([fetchEmployees(), fetchDepartments()]);
     } catch (err) {
-      toast(err.response?.data?.detail || 'Something went wrong', 'error');
+      toast(getApiError(err), 'error');
     } finally {
       setSaving(false);
     }
