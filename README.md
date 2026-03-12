@@ -137,7 +137,7 @@ See [API.md](API.md) for full documentation.
 
 ### Employee Management
 
-![Employees](https://api.microlink.io/?url=https://hrms-v76q.vercel.app/employees&screenshot=true&meta=false&embed=screenshot.url&waitForSelector=table)
+![Employees](https://iad.microlink.io/YPqjC1kQM_dKfQMFQr4yJk8PRpUSthvOWlkg-tlLlyklxxLs8LoOVb3H98N8HJnqM6gSq1dGvkiBSTV_9rHmgA.png)
 
 ### Attendance Tracking
 
