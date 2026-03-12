@@ -137,8 +137,8 @@ See [API.md](API.md) for full documentation.
 
 ### Employee Management
 
-![Employees](screenshots/employees.png)
+![Employees](https://image.thum.io/get/width/1280/https://hrms-v76q.vercel.app/employees)
 
 ### Attendance Tracking
 
-![Attendance](screenshots/attendance.png)
+![Attendance](https://image.thum.io/get/width/1280/https://hrms-v76q.vercel.app/attendance)
